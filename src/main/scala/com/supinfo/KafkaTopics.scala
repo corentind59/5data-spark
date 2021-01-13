@@ -8,4 +8,5 @@ object KafkaTopics {
   val KAFKA_TOPIC_CAMPUS = "supinfodwh-campus"
   val KAFKA_TOPIC_SCHOOL_LEAVE = "supinfodwh-schoolleave"
   val KAFKA_TOPIC_CONCURRENT = "supinfodwh-concurrent"
+  val KAFKA_TOPIC_HIRING = "supinfodwh-hiring"
 }
