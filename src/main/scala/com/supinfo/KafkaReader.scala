@@ -15,8 +15,7 @@ object KafkaReader {
         .format("kafka")
         .option("kafka.bootstrap.servers", KAFKA_BROKER_URL)
         .option("subscribe", topic)
-        .option("startingOffsets", "earliest")
-        .option("groupIdPrefix", "supinfodwh-spark-executor-")
+        .option("startingOffsets", s"""{ "$topic": { "0": 0 } }""")
         .load()
 
       val jsonDf = df.select(callUDF("deserialize", 'value) as 'raw_value)
