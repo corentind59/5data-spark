@@ -31,6 +31,8 @@ object StudentCurriculumOverviewSparkApplication {
     val dnmlzdProContracts = proContracts
       .join(companies, "company_id")
 
+    students.show(false)
+
     val studentsNotes = students
       .join(notes, "student_id")
       .join(dnmlzdProContracts, Seq("student_id"), "left")
