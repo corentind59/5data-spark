@@ -1,0 +1,18 @@
+language: scala
+scala:
+- 2.11.12
+addons:
+  ssh_known_hosts: 34.254.231.73
+script: true
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_f9beced916bd_key -iv $encrypted_f9beced916bd_iv
+  -in shopixel.pem.enc -out shopixel.pem -d
+- eval "$(ssh-agent -s)"
+- chmod 600 shopixel.pem
+- ssh-add shopixel.pem
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: $TRAVIS_BUILD_DIR/target/supinfodwh-spark-job-1.0-SNAPSHOT-jar-with-dependencies.jar ec2-user@34.254.231.73:~/efs/spark-jobs/spark-job.jar
+  on:
+    branch: main
